@@ -47,6 +47,10 @@
 			</array>
 		</dict>
 	</dict>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>需要使用藍牙來掃描並連接 BLE 裝置</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>需要使用藍牙來掃描並連接 BLE 裝置</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

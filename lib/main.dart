@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import 'ble_scan_page.dart';
 import 'iphone_preview.dart';
 
 void main() {
@@ -72,6 +73,7 @@ class _HomeShellState extends State<HomeShell> {
   static const _destinations = [
     (icon: Icons.add_circle_outline, label: '計數器'),
     (icon: Icons.list_alt, label: '待辦清單'),
+    (icon: Icons.bluetooth, label: '藍牙'),
     (icon: Icons.settings_outlined, label: '設定'),
   ];
 
@@ -80,6 +82,7 @@ class _HomeShellState extends State<HomeShell> {
     final page = switch (_index) {
       0 => const CounterPage(),
       1 => const TodoPage(),
+      2 => const BleScanPage(),
       _ => SettingsPage(dark: widget.dark, onDarkChanged: widget.onDarkChanged),
     };
 
