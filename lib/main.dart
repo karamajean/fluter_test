@@ -1,7 +1,16 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(const DemoApp());
+import 'iphone_preview.dart';
+
+void main() {
+  IPhone14ProPreview.applyPlatformOverride();
+  runApp(
+    IPhone14ProPreview.enabled
+        ? const IPhone14ProPreview(child: DemoApp())
+        : const DemoApp(),
+  );
+}
 
 /// Name of the platform the app is currently running on.
 String get platformName {

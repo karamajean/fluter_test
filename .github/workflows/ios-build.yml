@@ -1,0 +1,39 @@
+# Builds an unsigned iOS .ipa on a macOS runner (no Mac needed locally).
+# Download the artifact, then sign + install it on the iPhone with
+# Sideloadly (free Apple ID) or re-sign with a paid developer account.
+name: iOS build
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['lib/**', 'ios/**', 'pubspec.yaml', '.github/workflows/ios-build.yml']
+
+jobs:
+  build-ios:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.47.7
+          cache: true
+
+      - run: flutter pub get
+
+      - name: Build iOS (release, unsigned)
+        run: flutter build ios --release --no-codesign
+
+      - name: Package .ipa
+        run: |
+          mkdir -p Payload
+          cp -R build/ios/iphoneos/Runner.app Payload/
+          zip -qr fluter_test-unsigned.ipa Payload
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fluter_test-ios
+          path: fluter_test-unsigned.ipa
+          retention-days: 7
